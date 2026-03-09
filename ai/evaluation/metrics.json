@@ -1,0 +1,48 @@
+{
+  "demand_forecaster": {
+    "model_type": "LSTM",
+    "input_size": 31,
+    "hidden_size": 128,
+    "forecast_horizon": 14,
+    "lookback": 60,
+    "region": "Casablanca-Settat",
+    "blood_type": "O+",
+    "epochs_completed": 52,
+    "best_epoch": 37,
+    "best_val_loss_mse": 0.00852634998348852,
+    "final_train_loss": 0.009469964851935705,
+    "final_val_loss": 0.00891978177241981,
+    "loss_reduction_pct": 85.82713748795965,
+    "convergence_epoch": 25,
+    "overfit_ratio": 0.9419023102917394,
+    "training_time_s": 266.6886942386627,
+    "estimated_rmse_units": 2.22,
+    "estimated_mae_units": 1.77,
+    "estimated_mape_pct": 10.43,
+    "target_range": "5 - 29 units/day"
+  },
+  "donor_matcher": {
+    "model_type": "BASIC",
+    "donor_features": 15,
+    "request_features": 14,
+    "hidden_dim": 128,
+    "epochs_completed": 32,
+    "best_epoch": 22,
+    "best_val_accuracy": 0.9994703389830508,
+    "best_val_loss": 0.0039186816593428375,
+    "final_train_accuracy": 0.9988792194092827,
+    "final_val_accuracy": 0.9986758474576272,
+    "estimated_precision": 0.9995,
+    "estimated_recall": 0.9995,
+    "estimated_f1_score": 0.9995,
+    "convergence_epoch": 1,
+    "accuracy_stability_std": 0.000911,
+    "overfit_gap": 0.0002,
+    "training_time_s": 470.5127079486847
+  },
+  "summary": {
+    "total_training_time_min": 12.3,
+    "framework": "MindSpore",
+    "device": "CPU"
+  }
+}
