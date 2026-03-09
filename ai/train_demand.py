@@ -112,7 +112,7 @@ def train():
     args = parse_args()
 
     # Setup
-    context.set_context(mode=context.GRAPH_MODE, device_target=args.device)
+    context.set_context(mode=context.PYNATIVE_MODE, device_target=args.device)
     print("=" * 70)
     print("NIDAA — Blood Demand Forecasting Training")
     print("=" * 70)
@@ -181,11 +181,14 @@ def train():
     patience_counter = 0
 
     net.set_train(True)
-    grad_fn = ms.value_and_grad(
-        lambda x, y: loss_fn(net(x), y),
-        None,
-        optimizer.parameters,
-    )
+
+    # Define forward function (MindSpore can't compile inline lambdas)
+    def forward_fn(x, y):
+        pred = net(x)
+        loss = loss_fn(pred, y)
+        return loss
+
+    grad_fn = ms.value_and_grad(forward_fn, None, optimizer.parameters)
 
     start_total = time.time()
 

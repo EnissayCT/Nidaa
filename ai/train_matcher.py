@@ -108,7 +108,7 @@ def evaluate(net, donor_X, request_X, labels, loss_fn, batch_size):
 def train():
     args = parse_args()
 
-    context.set_context(mode=context.GRAPH_MODE, device_target=args.device)
+    context.set_context(mode=context.PYNATIVE_MODE, device_target=args.device)
     print("=" * 70)
     print("NIDAA — Donor Matching Training")
     print("=" * 70)
@@ -156,11 +156,14 @@ def train():
     patience_counter = 0
 
     net.set_train(True)
-    grad_fn = ms.value_and_grad(
-        lambda d, r, l: loss_fn(net(d, r), l),
-        None,
-        optimizer.parameters,
-    )
+
+    # Define forward function (MindSpore can't compile inline lambdas)
+    def forward_fn(d, r, l):
+        pred = net(d, r)
+        loss = loss_fn(pred, l)
+        return loss
+
+    grad_fn = ms.value_and_grad(forward_fn, None, optimizer.parameters)
 
     start_total = time.time()
 
