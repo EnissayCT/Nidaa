@@ -1,0 +1,13 @@
+{
+  "model_type": "lstm",
+  "input_size": 31,
+  "hidden_size": 128,
+  "forecast_horizon": 14,
+  "lookback": 60,
+  "region": "Casablanca-Settat",
+  "blood_type": "O+",
+  "best_val_loss": 0.00852634998348852,
+  "total_training_time_s": 266.6886942386627,
+  "epochs_completed": 52,
+  "device": "CPU"
+}

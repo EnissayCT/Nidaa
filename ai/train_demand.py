@@ -129,7 +129,7 @@ def train():
 
     # Output directory
     output_dir = args.output_dir or os.path.join(
-        os.path.dirname(__file__), '..', 'checkpoints', 'demand'
+        os.path.dirname(__file__), 'checkpoints', 'demand'
     )
     os.makedirs(output_dir, exist_ok=True)
 
