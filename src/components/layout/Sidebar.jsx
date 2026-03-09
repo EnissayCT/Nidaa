@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Users, Brain, Droplets, AlertTriangle,
-  BarChart3, MapPin, History, Heart, Trophy, LogOut, Activity, X,
+  BarChart3, MapPin, History, Heart, Trophy, LogOut, Activity, X, Building2,
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -10,6 +10,7 @@ const navigation = {
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
     { path: '/admin/users', label: 'Users & Accounts', icon: Users },
     { path: '/admin/ai', label: 'AI Models', icon: Brain },
+    { path: '/admin/sponsors', label: 'Sponsors & Partners', icon: Building2 },
   ],
   hospital: [
     { path: '/hospital', label: 'Dashboard', icon: LayoutDashboard, end: true },

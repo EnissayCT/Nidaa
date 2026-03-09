@@ -1,7 +1,45 @@
-import { Calendar, Droplets, Activity, CheckCircle2 } from 'lucide-react';
+import { Calendar, Droplets, Activity, CheckCircle2, Download } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { donationHistory, bloodAnalysis } from '../../data/mockData';
+import * as XLSX from 'xlsx';
+import { donationHistory, bloodAnalysis, currentDonor } from '../../data/mockData';
 import BloodTypeBadge from '../../components/common/BloodTypeBadge';
+
+function downloadAsExcel() {
+  // Donation History sheet
+  const historyRows = donationHistory.map((d) => ({
+    Date: d.date,
+    Location: d.location,
+    Type: d.type,
+    Volume: d.volume,
+    Status: d.status,
+    'Hemoglobin (g/dL)': d.hemoglobin,
+    'Blood Pressure': d.bloodPressure,
+    'Points Earned': d.points,
+  }));
+
+  // Blood Analysis sheet
+  const analysisRows = bloodAnalysis.map((a) => ({
+    Date: a.date,
+    'Hemoglobin (g/dL)': a.hemoglobin,
+    'Hematocrit (%)': a.hematocrit,
+    'Platelets (k/µL)': a.platelets,
+    'WBC (k/µL)': a.wbc,
+    'RBC (M/µL)': a.rbc,
+  }));
+
+  const wb = XLSX.utils.book_new();
+  const ws1 = XLSX.utils.json_to_sheet(historyRows);
+  const ws2 = XLSX.utils.json_to_sheet(analysisRows);
+
+  // Column widths
+  ws1['!cols'] = [{ wch: 12 }, { wch: 45 }, { wch: 14 }, { wch: 10 }, { wch: 12 }, { wch: 16 }, { wch: 14 }, { wch: 14 }];
+  ws2['!cols'] = [{ wch: 12 }, { wch: 16 }, { wch: 14 }, { wch: 16 }, { wch: 12 }, { wch: 12 }];
+
+  XLSX.utils.book_append_sheet(wb, ws1, 'Donation History');
+  XLSX.utils.book_append_sheet(wb, ws2, 'Blood Analysis');
+
+  XLSX.writeFile(wb, `NIDAA_Donations_${currentDonor.name.replace(/ /g, '_')}.xlsx`);
+}
 
 export default function DonorHistory() {
   return (
@@ -33,6 +71,13 @@ export default function DonorHistory() {
             <h3 className="font-semibold text-gray-900">Blood Analysis Trends</h3>
             <p className="text-sm text-gray-500">Key health metrics from your donation records</p>
           </div>
+          <button
+            onClick={downloadAsExcel}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-medium hover:bg-emerald-100 transition-colors"
+          >
+            <Download size={14} />
+            Download Excel
+          </button>
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={[...bloodAnalysis].reverse()} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>

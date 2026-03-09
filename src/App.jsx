@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminAI from './pages/admin/AdminAI';
+import AdminSponsors from './pages/admin/AdminSponsors';
 import HospitalDashboard from './pages/hospital/HospitalDashboard';
 import HospitalRequests from './pages/hospital/HospitalRequests';
 import HospitalStock from './pages/hospital/HospitalStock';
@@ -26,6 +27,7 @@ export default function App() {
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="ai" element={<AdminAI />} />
+        <Route path="sponsors" element={<AdminSponsors />} />
       </Route>
 
       <Route path="/hospital" element={<DashboardLayout role="hospital" />}>

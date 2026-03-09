@@ -1,5 +1,8 @@
-import { Droplets, Heart, Trophy, Calendar, TrendingUp, Star, Zap, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Droplets, Heart, Trophy, Calendar, TrendingUp, Star, Zap, ArrowRight, Clock, Bell, BellRing, CheckCircle, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import clsx from 'clsx';
 import StatCard from '../../components/common/StatCard';
 import BloodTypeBadge from '../../components/common/BloodTypeBadge';
 import { currentDonor, donationHistory, impactData, badges } from '../../data/mockData';
@@ -10,9 +13,68 @@ const quickActions = [
   { label: 'Rewards & Badges', to: '/donor/rewards', icon: Trophy, color: 'from-amber-500 to-orange-600' },
 ];
 
+const donationServices = [
+  {
+    id: 'whole-blood',
+    name: 'Whole Blood',
+    icon: '🩸',
+    cooldown: '56 days',
+    frequency: '~6x / year',
+    duration: '10–15 min',
+    points: 200,
+    description: 'Standard donation — the most needed type. Used in surgeries, emergencies, and transfusions.',
+    status: 'available',
+    eligible: true,
+    nextEligible: currentDonor.nextEligible,
+    impact: 'Saves up to 3 lives per donation',
+  },
+  {
+    id: 'plasma',
+    name: 'Plasma Donation',
+    icon: '🧬',
+    cooldown: '28 days',
+    frequency: '~13x / year',
+    duration: '45–60 min',
+    points: 350,
+    description: 'Plasma is essential for burn treatment, immunodeficiency therapy, and clotting disorders. Collected via apheresis — your red cells are returned to you.',
+    status: 'coming-soon',
+    launchDate: 'June 2026',
+    impact: 'Critical for burn victims and immune disorders',
+  },
+  {
+    id: 'platelets',
+    name: 'Platelet Donation',
+    icon: '🔬',
+    cooldown: '7 days',
+    frequency: 'Up to 24x / year',
+    duration: '60–90 min',
+    points: 400,
+    description: 'Platelets are vital for cancer patients, organ transplants, and major surgeries. Single donation can provide 6x more platelets than whole blood extraction.',
+    status: 'coming-soon',
+    launchDate: 'September 2026',
+    impact: 'Lifeline for cancer and transplant patients',
+  },
+  {
+    id: 'double-red',
+    name: 'Double Red Cell',
+    icon: '❤️‍🔥',
+    cooldown: '112 days',
+    frequency: '~3x / year',
+    duration: '30 min',
+    points: 500,
+    description: 'Collects 2 units of red cells in a single visit — ideal for universal donors (O- and O+). Red cells returned plasma and platelets to you.',
+    status: 'coming-soon',
+    launchDate: '2027',
+    impact: 'Double the red cells, double the impact',
+  },
+];
+
 export default function DonorDashboard() {
+  const [notified, setNotified] = useState({});
   const earnedBadges = badges.filter((b) => b.earned);
   const daysUntilEligible = Math.max(0, Math.ceil((new Date(currentDonor.nextEligible) - new Date()) / (1000 * 60 * 60 * 24)));
+
+  const toggleNotify = (id) => setNotified((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
     <div className="space-y-6">
@@ -76,6 +138,110 @@ export default function DonorDashboard() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
+        {/* Donation Services */}
+        <div className="lg:col-span-2">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                <Sparkles size={18} className="text-purple-500" />
+                Donation Services
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">More ways to donate = more visits, more impact, more points</p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {donationServices.map((service, i) => {
+              const isComingSoon = service.status === 'coming-soon';
+              const isNotified = notified[service.id];
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                  className={clsx(
+                    'card p-4 relative overflow-hidden transition-all',
+                    isComingSoon ? 'border-dashed border-2 border-gray-200' : 'hover:shadow-md'
+                  )}
+                >
+                  {isComingSoon && (
+                    <div className="absolute top-2 right-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 uppercase tracking-wider">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
+                  {!isComingSoon && service.eligible && (
+                    <div className="absolute top-2 right-2">
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 flex items-center gap-0.5">
+                        <CheckCircle size={9} /> Available
+                      </span>
+                    </div>
+                  )}
+
+                  <span className="text-3xl">{service.icon}</span>
+                  <h4 className="text-sm font-bold text-gray-900 mt-2">{service.name}</h4>
+                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">{service.description}</p>
+
+                  <div className="mt-3 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <Clock size={11} className="text-gray-400" />
+                      <span>Every <span className="font-semibold text-gray-900">{service.cooldown}</span></span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <TrendingUp size={11} className="text-gray-400" />
+                      <span className="font-medium text-gray-900">{service.frequency}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                      <Star size={11} className="text-amber-400 fill-amber-400" />
+                      <span><span className="font-semibold text-amber-600">{service.points}</span> pts / donation</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-400 mb-2">{service.impact}</p>
+                    {isComingSoon ? (
+                      <button
+                        onClick={() => toggleNotify(service.id)}
+                        className={clsx(
+                          'w-full text-xs font-medium py-2 rounded-lg transition-all flex items-center justify-center gap-1.5',
+                          isNotified
+                            ? 'bg-purple-100 text-purple-700'
+                            : 'bg-gray-900 text-white hover:bg-gray-800'
+                        )}
+                      >
+                        {isNotified ? (
+                          <>
+                            <BellRing size={12} />
+                            You'll be notified · {service.launchDate}
+                          </>
+                        ) : (
+                          <>
+                            <Bell size={12} />
+                            Notify Me · {service.launchDate}
+                          </>
+                        )}
+                      </button>
+                    ) : (
+                      <div className="text-xs text-gray-500">
+                        {service.eligible ? (
+                          daysUntilEligible > 0 ? (
+                            <span>Eligible in <span className="font-semibold text-red-600">{daysUntilEligible} days</span></span>
+                          ) : (
+                            <Link to="/donor/nearby" className="inline-flex items-center gap-1 text-red-600 font-semibold hover:text-red-700">
+                              Book Now <ArrowRight size={12} />
+                            </Link>
+                          )
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Recent Donations */}
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">

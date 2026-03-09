@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Brain, Cpu, Clock, Database, RefreshCw, CheckCircle2, Loader2, Zap, BarChart3 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Brain, Cpu, Clock, Database, RefreshCw, CheckCircle2, Loader2, Zap, BarChart3, Target } from 'lucide-react';
+import { LineChart, Line, BarChart, Bar, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import clsx from 'clsx';
 import { aiModels } from '../../data/mockData';
 import AILoadingIndicator from '../../components/common/AILoadingIndicator';
@@ -12,6 +12,16 @@ const trainingHistory = Array.from({ length: 12 }, (_, i) => ({
   accuracy: Math.min(60 + i * 4 + Math.random() * 3, 95).toFixed(1),
   loss: Math.max(0.8 - i * 0.06 + Math.random() * 0.02, 0.08).toFixed(3),
 }));
+
+// Model accuracy history (monthly)
+const accuracyHistory = [
+  { month: 'Oct', mae: 4.2, rmse: 5.8, accuracy: 91.2 },
+  { month: 'Nov', mae: 3.8, rmse: 5.1, accuracy: 92.5 },
+  { month: 'Dec', mae: 5.1, rmse: 6.9, accuracy: 89.1 },
+  { month: 'Jan', mae: 3.5, rmse: 4.8, accuracy: 93.0 },
+  { month: 'Feb', mae: 3.1, rmse: 4.3, accuracy: 94.2 },
+  { month: 'Mar', mae: 2.9, rmse: 4.0, accuracy: 94.8 },
+];
 
 const statusColors = {
   active: 'bg-emerald-100 text-emerald-700',
@@ -138,6 +148,51 @@ export default function AdminAI() {
             <Line yAxisId="right" type="monotone" dataKey="loss" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} />
           </LineChart>
         </ResponsiveContainer>
+      </div>
+
+      {/* Model Performance */}
+      <div className="card p-6">
+        <div className="flex items-center gap-2 mb-1">
+          <Target size={18} className="text-red-500" />
+          <h3 className="font-semibold text-gray-900">Model Performance</h3>
+        </div>
+        <p className="text-sm text-gray-500 mb-4">Monthly forecast accuracy and error metrics (lower MAE = better)</p>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={accuracyHistory} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+            <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+            <YAxis tick={{ fontSize: 12 }} />
+            <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #e5e7eb' }} />
+            <Legend wrapperStyle={{ fontSize: 12 }} />
+            <Bar dataKey="mae" name="MAE" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="rmse" name="RMSE" fill="#ef4444" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="accuracy" name="Accuracy %" fill="#10b981" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Model Detail Cards */}
+      <div className="grid sm:grid-cols-3 gap-4">
+        {[
+          { label: 'LSTM Demand Forecaster', version: 'v2.1.0', framework: 'MindSpore 2.3', params: '1.2M', trainedOn: '180k records', lastRetrain: 'Feb 28, 2026', accuracy: '94.8%' },
+          { label: 'DenseNet Donor Matcher', version: 'v1.0.0', framework: 'MindSpore 2.3', params: '890k', trainedOn: '45k donor pairs', lastRetrain: 'Mar 1, 2026', accuracy: '92.1%' },
+          { label: 'Risk Assessment Engine', version: 'v1.2.0', framework: 'MindSpore 2.3', params: '650k', trainedOn: '12k events', lastRetrain: 'Mar 3, 2026', accuracy: '91.5%' },
+        ].map((m) => (
+          <div key={m.label} className="card p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Brain size={16} className="text-red-500" />
+              <h4 className="text-sm font-semibold text-gray-900">{m.label}</h4>
+            </div>
+            <div className="space-y-1.5 text-xs">
+              <div className="flex justify-between"><span className="text-gray-500">Version</span><span className="font-medium text-gray-700">{m.version}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Framework</span><span className="font-medium text-gray-700">{m.framework}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Parameters</span><span className="font-medium text-gray-700">{m.params}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Training Data</span><span className="font-medium text-gray-700">{m.trainedOn}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Last Retrain</span><span className="font-medium text-gray-700">{m.lastRetrain}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Accuracy</span><span className="font-semibold text-emerald-600">{m.accuracy}</span></div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Infrastructure Info */}
