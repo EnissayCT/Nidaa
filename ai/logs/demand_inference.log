@@ -1,0 +1,37 @@
+NIDAA — Demand Forecasting Inference
+============================================================
+[INFO] Loading trained model from checkpoints/demand/best_model.ckpt
+[INFO] Model loaded: LSTM (132,238 params)
+[INFO] Device: Ascend 910B
+[INFO] Running inference for O+ in Casablanca-Settat...
+[INFO] Input window: 60 days → Predicting 14 days
+
+============================================================
+NIDAA — Blood Demand Forecast Report
+Region:     Casablanca-Settat
+Blood Type: O+
+============================================================
+ Day |  Predicted Demand (units)
+-----------------------------------
+  + 1 |                        15
+  + 2 |                        14
+  + 3 |                        16
+  + 4 |                        13
+  + 5 |                        17
+  + 6 |                        12
+  + 7 |                        11
+  + 8 |                        15
+  + 9 |                        16
+  +10 |                        14
+  +11 |                        18
+  +12 |                        13
+  +13 |                        12
+  +14 |                        15
+-----------------------------------
+Total 14-day demand: 201 units
+Average daily:       14.4 units
+============================================================
+
+[INFO] Inference time: 0.023s
+[INFO] Model confidence (mean): 0.89
+[✓] Report saved to checkpoints/demand/inference_report.txt

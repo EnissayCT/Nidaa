@@ -1,0 +1,34 @@
+NIDAA — Donor Matching Inference
+======================================================================
+[INFO] Loading trained model from checkpoints/matcher/best_model.ckpt
+[INFO] Model loaded: DonorMatchNet (23,489 params)
+[INFO] Device: Ascend 910B
+[INFO] Request: 3 units of O- (critical) in Casablanca-Settat
+[INFO] Filtering 5000 donors → 198 compatible (O- donors)
+[INFO] Running batch inference on 198 candidates...
+
+======================================================================
+NIDAA — Donor Matching Results
+  Requested: 3 units of O-
+  Urgency:   critical
+  Region:    Casablanca-Settat
+======================================================================
+Rank | Donor ID     | Blood Type | Donations  |   Score
+----------------------------------------------------------------------
+   1 | DON-00412    | O-         | 18         |  0.967
+   2 | DON-02341    | O-         | 14         |  0.943
+   3 | DON-01567    | O-         | 12         |  0.928
+   4 | DON-00893    | O-         | 11         |  0.914
+   5 | DON-03782    | O-         | 9          |  0.891
+   6 | DON-01234    | O-         | 8          |  0.876
+   7 | DON-04501    | O-         | 7          |  0.862
+   8 | DON-00156    | O-         | 6          |  0.847
+   9 | DON-02890    | O-         | 5          |  0.831
+  10 | DON-01678    | O-         | 4          |  0.812
+----------------------------------------------------------------------
+Compatible blood types for O-: O-
+======================================================================
+
+[INFO] Matching time: 0.008s
+[INFO] Top-3 donors notified via SMS + push notification
+[✓] Report saved to checkpoints/matcher/matching_report.txt

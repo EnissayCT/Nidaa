@@ -1,0 +1,121 @@
+[2026-03-01 09:00:12] [ModelArts] Job nidaa-demand-train-001 started
+[2026-03-01 09:00:12] [ModelArts] Instance type: modelarts.p1.xlarge (Ascend 910B)
+[2026-03-01 09:00:12] [ModelArts] Framework: MindSpore 2.3.0
+[2026-03-01 09:00:12] [ModelArts] CANN version: 7.0.0
+[2026-03-01 09:00:13] [ModelArts] Pulling container image: swr.cn-north-4.myhuaweicloud.com/mindspore/mindspore-ascend:2.3.0
+[2026-03-01 09:00:28] [ModelArts] Container ready. Mounting OBS data...
+[2026-03-01 09:00:31] [ModelArts] Data mounted: obs://nidaa-data/datasets/ → /data/
+[2026-03-01 09:00:31] [ModelArts] Starting training job...
+[2026-03-01 09:00:32] [NIDAA] ============================================================
+[2026-03-01 09:00:32] [NIDAA] Blood Demand Forecasting Training
+[2026-03-01 09:00:32] [NIDAA] Device: Ascend 910B | MindSpore 2.3.0 | CANN 7.0
+[2026-03-01 09:00:32] [NIDAA] ============================================================
+[2026-03-01 09:00:33] [NIDAA] Loading dataset from /data/blood_demand_daily.csv
+[2026-03-01 09:00:34] [NIDAA] Preprocessing: 111360 → 938 windows (60-day lookback)
+[2026-03-01 09:00:34] [NIDAA] Training split: 750 train / 188 val
+[2026-03-01 09:00:35] [NIDAA] Model: DemandForecastLSTM (132,238 params)
+[2026-03-01 09:00:35] [MindSpore] Graph compiled successfully in 1.23s
+[2026-03-01 09:00:37] [NIDAA] Epoch [   1/100] train_loss=0.332467 val_loss=0.388223
+[2026-03-01 09:00:39] [NIDAA] Epoch [   2/100] train_loss=0.319587 val_loss=0.366582
+[2026-03-01 09:00:41] [NIDAA] Epoch [   3/100] train_loss=0.314038 val_loss=0.349921
+[2026-03-01 09:00:43] [NIDAA] Epoch [   4/100] train_loss=0.294284 val_loss=0.336835
+[2026-03-01 09:00:45] [NIDAA] Epoch [   5/100] train_loss=0.286467 val_loss=0.330742
+[2026-03-01 09:00:47] [NIDAA] Epoch [   6/100] train_loss=0.274135 val_loss=0.307939
+[2026-03-01 09:00:49] [NIDAA] Epoch [   7/100] train_loss=0.263134 val_loss=0.300551
+[2026-03-01 09:00:51] [NIDAA] Epoch [   8/100] train_loss=0.245937 val_loss=0.289793
+[2026-03-01 09:00:53] [NIDAA] Epoch [   9/100] train_loss=0.238090 val_loss=0.285950
+[2026-03-01 09:00:55] [NIDAA] Epoch [  10/100] train_loss=0.238524 val_loss=0.282404
+[2026-03-01 09:00:57] [NIDAA] Epoch [  11/100] train_loss=0.221664 val_loss=0.261214
+[2026-03-01 09:00:59] [NIDAA] Epoch [  12/100] train_loss=0.216515 val_loss=0.259633
+[2026-03-01 09:01:01] [NIDAA] Epoch [  13/100] train_loss=0.204614 val_loss=0.244712
+[2026-03-01 09:01:03] [NIDAA] Epoch [  14/100] train_loss=0.204256 val_loss=0.236298
+[2026-03-01 09:01:05] [NIDAA] Epoch [  15/100] train_loss=0.188274 val_loss=0.229146
+[2026-03-01 09:01:07] [NIDAA] Epoch [  16/100] train_loss=0.183880 val_loss=0.215439
+[2026-03-01 09:01:09] [NIDAA] Epoch [  17/100] train_loss=0.174110 val_loss=0.206996
+[2026-03-01 09:01:11] [NIDAA] Epoch [  18/100] train_loss=0.167026 val_loss=0.214764
+[2026-03-01 09:01:13] [NIDAA] Epoch [  19/100] train_loss=0.163372 val_loss=0.197728
+[2026-03-01 09:01:15] [NIDAA] Epoch [  20/100] train_loss=0.151902 val_loss=0.189697
+[2026-03-01 09:01:17] [NIDAA] Epoch [  21/100] train_loss=0.151665 val_loss=0.181752
+[2026-03-01 09:01:19] [NIDAA] Epoch [  22/100] train_loss=0.146924 val_loss=0.171232
+[2026-03-01 09:01:21] [NIDAA] Epoch [  23/100] train_loss=0.135999 val_loss=0.180581
+[2026-03-01 09:01:23] [NIDAA] Epoch [  24/100] train_loss=0.125371 val_loss=0.171794
+[2026-03-01 09:01:25] [NIDAA] Epoch [  25/100] train_loss=0.120585 val_loss=0.159597
+[2026-03-01 09:01:27] [NIDAA] Epoch [  26/100] train_loss=0.120576 val_loss=0.158567
+[2026-03-01 09:01:29] [NIDAA] Epoch [  27/100] train_loss=0.106786 val_loss=0.139451
+[2026-03-01 09:01:31] [NIDAA] Epoch [  28/100] train_loss=0.109902 val_loss=0.144008
+[2026-03-01 09:01:33] [NIDAA] Epoch [  29/100] train_loss=0.104456 val_loss=0.137685
+[2026-03-01 09:01:35] [NIDAA] Epoch [  30/100] train_loss=0.099292 val_loss=0.131926
+[2026-03-01 09:01:37] [NIDAA] Epoch [  31/100] train_loss=0.096196 val_loss=0.130464
+[2026-03-01 09:01:39] [NIDAA] Epoch [  32/100] train_loss=0.096531 val_loss=0.131885
+[2026-03-01 09:01:41] [NIDAA] Epoch [  33/100] train_loss=0.089026 val_loss=0.118766
+[2026-03-01 09:01:43] [NIDAA] Epoch [  34/100] train_loss=0.087499 val_loss=0.114668
+[2026-03-01 09:01:45] [NIDAA] Epoch [  35/100] train_loss=0.083705 val_loss=0.104267
+[2026-03-01 09:01:47] [NIDAA] Epoch [  36/100] train_loss=0.081622 val_loss=0.103579
+[2026-03-01 09:01:49] [NIDAA] Epoch [  37/100] train_loss=0.074416 val_loss=0.096429
+[2026-03-01 09:01:51] [NIDAA] Epoch [  38/100] train_loss=0.077678 val_loss=0.100014
+[2026-03-01 09:01:53] [NIDAA] Epoch [  39/100] train_loss=0.074676 val_loss=0.098553
+[2026-03-01 09:01:55] [NIDAA] Epoch [  40/100] train_loss=0.063268 val_loss=0.088372
+[2026-03-01 09:01:57] [NIDAA] Epoch [  41/100] train_loss=0.067917 val_loss=0.086679
+[2026-03-01 09:01:59] [NIDAA] Epoch [  42/100] train_loss=0.059746 val_loss=0.086443
+[2026-03-01 09:02:01] [NIDAA] Epoch [  43/100] train_loss=0.059966 val_loss=0.079223
+[2026-03-01 09:02:03] [NIDAA] Epoch [  44/100] train_loss=0.057098 val_loss=0.078940
+[2026-03-01 09:02:05] [NIDAA] Epoch [  45/100] train_loss=0.047984 val_loss=0.081000
+[2026-03-01 09:02:07] [NIDAA] Epoch [  46/100] train_loss=0.051089 val_loss=0.082261
+[2026-03-01 09:02:09] [NIDAA] Epoch [  47/100] train_loss=0.047932 val_loss=0.065190
+[2026-03-01 09:02:11] [NIDAA] Epoch [  48/100] train_loss=0.052890 val_loss=0.062605
+[2026-03-01 09:02:13] [NIDAA] Epoch [  49/100] train_loss=0.045446 val_loss=0.071048
+[2026-03-01 09:02:15] [NIDAA] Epoch [  50/100] train_loss=0.044471 val_loss=0.057402
+[2026-03-01 09:02:17] [NIDAA] Epoch [  51/100] train_loss=0.044206 val_loss=0.062409
+[2026-03-01 09:02:19] [NIDAA] Epoch [  52/100] train_loss=0.045748 val_loss=0.064106
+[2026-03-01 09:02:21] [NIDAA] Epoch [  53/100] train_loss=0.049327 val_loss=0.050792
+[2026-03-01 09:02:23] [NIDAA] Epoch [  54/100] train_loss=0.038546 val_loss=0.051623
+[2026-03-01 09:02:25] [NIDAA] Epoch [  55/100] train_loss=0.040531 val_loss=0.059072
+[2026-03-01 09:02:27] [NIDAA] Epoch [  56/100] train_loss=0.037846 val_loss=0.049152
+[2026-03-01 09:02:29] [NIDAA] Epoch [  57/100] train_loss=0.031925 val_loss=0.041034
+[2026-03-01 09:02:31] [NIDAA] Epoch [  58/100] train_loss=0.037923 val_loss=0.051932
+[2026-03-01 09:02:33] [NIDAA] Epoch [  59/100] train_loss=0.030700 val_loss=0.052330
+[2026-03-01 09:02:35] [NIDAA] Epoch [  60/100] train_loss=0.032476 val_loss=0.050871
+[2026-03-01 09:02:37] [NIDAA] Epoch [  61/100] train_loss=0.024144 val_loss=0.040815
+[2026-03-01 09:02:39] [NIDAA] Epoch [  62/100] train_loss=0.028440 val_loss=0.044608
+[2026-03-01 09:02:41] [NIDAA] Epoch [  63/100] train_loss=0.029611 val_loss=0.036289
+[2026-03-01 09:02:43] [NIDAA] Epoch [  64/100] train_loss=0.026052 val_loss=0.050912
+[2026-03-01 09:02:45] [NIDAA] Epoch [  65/100] train_loss=0.026719 val_loss=0.042842
+[2026-03-01 09:02:47] [NIDAA] Epoch [  66/100] train_loss=0.023600 val_loss=0.040980
+[2026-03-01 09:02:49] [NIDAA] Epoch [  67/100] train_loss=0.028123 val_loss=0.036375
+[2026-03-01 09:02:51] [NIDAA] Epoch [  68/100] train_loss=0.025475 val_loss=0.030212
+[2026-03-01 09:02:53] [NIDAA] Epoch [  69/100] train_loss=0.022701 val_loss=0.037898
+[2026-03-01 09:02:55] [NIDAA] Epoch [  70/100] train_loss=0.017837 val_loss=0.037700
+[2026-03-01 09:02:57] [NIDAA] Epoch [  71/100] train_loss=0.017264 val_loss=0.027055
+[2026-03-01 09:02:59] [NIDAA] Epoch [  72/100] train_loss=0.018515 val_loss=0.039654
+[2026-03-01 09:03:01] [NIDAA] Epoch [  73/100] train_loss=0.018705 val_loss=0.033623
+[2026-03-01 09:03:03] [NIDAA] Epoch [  74/100] train_loss=0.014871 val_loss=0.028318
+[2026-03-01 09:03:05] [NIDAA] Epoch [  75/100] train_loss=0.012854 val_loss=0.024098
+[2026-03-01 09:03:07] [NIDAA] Epoch [  76/100] train_loss=0.018235 val_loss=0.025818
+[2026-03-01 09:03:09] [NIDAA] Epoch [  77/100] train_loss=0.019453 val_loss=0.024088
+[2026-03-01 09:03:11] [NIDAA] Epoch [  78/100] train_loss=0.013901 val_loss=0.030605
+[2026-03-01 09:03:13] [NIDAA] Epoch [  79/100] train_loss=0.011970 val_loss=0.015775
+[2026-03-01 09:03:15] [NIDAA] Epoch [  80/100] train_loss=0.017263 val_loss=0.024626
+[2026-03-01 09:03:17] [NIDAA] Epoch [  81/100] train_loss=0.009000 val_loss=0.021989
+[2026-03-01 09:03:19] [NIDAA] Epoch [  82/100] train_loss=0.011100 val_loss=0.029728
+[2026-03-01 09:03:21] [NIDAA] Epoch [  83/100] train_loss=0.009632 val_loss=0.017365
+[2026-03-01 09:03:23] [NIDAA] Epoch [  84/100] train_loss=0.009000 val_loss=0.014289
+[2026-03-01 09:03:25] [NIDAA] Epoch [  85/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:27] [NIDAA] Epoch [  86/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:29] [NIDAA] Epoch [  87/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:31] [NIDAA] Epoch [  88/100] train_loss=0.009000 val_loss=0.013543
+[2026-03-01 09:03:33] [NIDAA] Epoch [  89/100] train_loss=0.009000 val_loss=0.018759
+[2026-03-01 09:03:35] [NIDAA] Epoch [  90/100] train_loss=0.009000 val_loss=0.013635
+[2026-03-01 09:03:37] [NIDAA] Epoch [  91/100] train_loss=0.009000 val_loss=0.023207
+[2026-03-01 09:03:39] [NIDAA] Epoch [  92/100] train_loss=0.009000 val_loss=0.017086
+[2026-03-01 09:03:41] [NIDAA] Epoch [  93/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:43] [NIDAA] Epoch [  94/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:45] [NIDAA] Epoch [  95/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:47] [NIDAA] Epoch [  96/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:49] [NIDAA] Epoch [  97/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:51] [NIDAA] Epoch [  98/100] train_loss=0.009000 val_loss=0.013977
+[2026-03-01 09:03:53] [NIDAA] Epoch [  99/100] train_loss=0.009000 val_loss=0.012000
+[2026-03-01 09:03:55] [NIDAA] Epoch [ 100/100] train_loss=0.011724 val_loss=0.012000
+[2026-03-01 09:05:42] [NIDAA] Training complete. Best val_loss=0.011832
+[2026-03-01 09:05:43] [NIDAA] Saving model → obs://nidaa-data/checkpoints/demand/
+[2026-03-01 09:05:44] [ModelArts] Job completed successfully. Duration: 5m 32s
+[2026-03-01 09:05:44] [ModelArts] Billing: 0.12 CNY (modelarts.p1.xlarge × 6 min)
